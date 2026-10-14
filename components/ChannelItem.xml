@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One row of the channel list: number, name and an HD tag. -->
+<component name="ChannelItem" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="onContentChange" />
+        <field id="focusPercent" type="float" onChange="onFocusChange" />
+        <field id="listHasFocus" type="boolean" value="true" onChange="onFocusChange" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/ChannelItem.brs" />
+
+    <children>
+        <Rectangle width="1728" height="72" color="0x1B2633FF" />
+        <Rectangle id="highlight" width="1728" height="72" color="0x3D8BFDFF" opacity="0" />
+        <Label id="number" translation="[24,0]" width="150" height="72" vertAlign="center"
+            font="font:MediumBoldSystemFont" color="0xFFFFFFFF" />
+        <Label id="name" translation="[190,0]" width="1380" height="72" vertAlign="center"
+            font="font:MediumSystemFont" color="0xFFFFFFFF" />
+        <Label id="hd" text="HD" translation="[1584,0]" width="120" height="72" horizAlign="right"
+            vertAlign="center" font="font:SmallBoldSystemFont" color="0xE8EEF5FF" />
+    </children>
+</component>

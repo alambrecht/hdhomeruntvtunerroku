@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Full-screen live player with a channel banner. -->
+<component name="PlayerScreen" extends="Group">
+    <interface>
+        <field id="channels" type="array" />
+        <!-- Set by the scene to pick a channel; also updated here on channel up/down. -->
+        <field id="index" type="integer" alwaysNotify="true" onChange="onIndexChange" />
+        <!-- true plays the channel at index; false stops the stream and frees the tuner. -->
+        <field id="active" type="boolean" onChange="onActiveChange" />
+        <!-- Output: Back was pressed. -->
+        <field id="exitRequested" type="boolean" alwaysNotify="true" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/PlayerScreen.brs" />
+
+    <children>
+        <Rectangle width="1920" height="1080" color="0x000000FF" />
+        <Video id="video" width="1920" height="1080" enableUI="false" />
+
+        <Group id="banner" visible="false">
+            <Rectangle id="bannerBg" width="1200" height="100" color="0x000000CC" />
+            <Label id="title" translation="[36,0]" width="1128" height="100" vertAlign="center"
+                font="font:LargeSystemFont" color="0xFFFFFFFF" />
+            <Label id="detail" translation="[36,92]" width="1128" height="76" wrap="true" maxLines="2"
+                font="font:SmallSystemFont" color="0xFFB4ABFF" />
+        </Group>
+
+        <!-- Waits before tuning, so rapid channel presses skip channels without opening each stream. -->
+        <Timer id="tuneTimer" duration="0.25" />
+        <Timer id="hideTimer" duration="3" />
+    </children>
+</component>

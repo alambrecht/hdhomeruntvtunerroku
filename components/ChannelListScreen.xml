@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Channel list with a "Tuner address" button. -->
+<component name="ChannelListScreen" extends="Group">
+    <interface>
+        <field id="channels" type="array" onChange="onChannelsChange" />
+        <field id="focusIndex" type="integer" alwaysNotify="true" onChange="onFocusIndexChange" />
+        <!-- Outputs -->
+        <field id="picked" type="integer" alwaysNotify="true" />
+        <field id="settingsRequested" type="boolean" alwaysNotify="true" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/ChannelListScreen.brs" />
+
+    <children>
+        <Label text="Live TV" translation="[96,54]" height="84" vertAlign="center"
+            font="font:LargeBoldSystemFont" color="0xFFFFFFFF" />
+        <Button id="settings" text="Tuner address" translation="[1464,54]" minWidth="360"
+            maxWidth="360" height="84" iconUri="" focusedIconUri="" showFocusFootprint="true" />
+
+        <MarkupList id="list" itemComponentName="ChannelItem" translation="[96,174]"
+            itemSize="[1728,72]" itemSpacing="[0,8]" numRows="10" drawFocusFeedback="false"
+            vertFocusAnimationStyle="floatingFocus" />
+
+        <Label id="empty" visible="false" translation="[96,174]" width="1728" wrap="true"
+            font="font:MediumSystemFont" color="0xFFFFFFFF"
+            text="No ATSC 1.0 channels found. Run a channel scan on the HDHomeRun, then reopen the app." />
+    </children>
+</component>

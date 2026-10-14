@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Finds the tuner and loads its lineup. Network calls can't run on the render thread. -->
+<component name="HdhrTask" extends="Task">
+    <interface>
+        <!-- Saved tuner address, or "" to use cloud discovery. -->
+        <field id="baseUrl" type="string" />
+        <!-- { baseUrl, channels: [{ number, name, url, hd, warning }], error } -->
+        <field id="result" type="assocarray" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/HdhrTask.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Util.brs" />
+</component>

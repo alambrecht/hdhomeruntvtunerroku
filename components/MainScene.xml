@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="MainScene" extends="Scene">
+    <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Util.brs" />
+
+    <children>
+        <Label id="status" translation="[160,0]" width="1600" height="1080" horizAlign="center"
+            vertAlign="center" wrap="true" font="font:MediumSystemFont" color="0xFFFFFFFF" />
+        <ChannelListScreen id="channelList" visible="false" />
+        <PlayerScreen id="player" visible="false" />
+    </children>
+</component>
