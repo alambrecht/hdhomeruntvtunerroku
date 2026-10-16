@@ -93,7 +93,6 @@ function httpGet(url as String) as Dynamic
     xfer.SetUrl(url)
     if LCase(Left(url, 6)) = "https:" then
         xfer.SetCertificatesFile("common:/certs/ca-bundle.crt")
-        xfer.InitClientCertificates()
     end if
 
     if not xfer.AsyncGetToString() then

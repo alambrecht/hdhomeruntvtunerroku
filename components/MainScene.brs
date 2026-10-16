@@ -18,6 +18,7 @@ sub init()
     m.channels = invalid
     m.lastIndex = 0
     m.lastError = ""
+    m.launched = false
     loadChannels()
 end sub
 
@@ -48,6 +49,8 @@ sub onLoaded()
     m.loading = false
     if result.baseUrl <> "" and result.baseUrl <> savedBaseUrl() then saveBaseUrl(result.baseUrl)
 
+    signalLaunchComplete()
+
     if result.error <> "" then
         m.lastError = result.error
         showStatus(result.error + Chr(10) + Chr(10) + "Press OK to enter the tuner address.")
@@ -59,6 +62,13 @@ sub onLoaded()
     m.list.channels = m.channels
     m.player.channels = m.channels
     showList()
+end sub
+
+' Roku certification requires this beacon once the first interactive screen is up.
+sub signalLaunchComplete()
+    if m.launched then return
+    m.launched = true
+    m.top.signalBeacon("AppLaunchComplete")
 end sub
 
 sub showStatus(text as String)

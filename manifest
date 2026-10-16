@@ -10,3 +10,4 @@ splash_screen_hd=pkg:/images/splash_hd.png
 splash_color=#1B2633
 
 ui_resolutions=fhd
+rsg_version=1.3

@@ -26,7 +26,7 @@ The official HDHomeRun app finds tuners with local broadcast discovery, which do
 - UI: Roku SceneGraph (XML components), FHD (1920×1080) layout that Roku scales for HD devices.
 - Playback: SceneGraph `Video` node (`streamFormat: ts`, `live: true`).
 - Networking: `roUrlTransfer` in a `Task` node.
-- Platform: Roku OS 10 or later (the tuner address dialog uses `StandardKeyboardDialog`).
+- Platform: Roku OS 15.1 or later (required by the Channel Store for SceneGraph 1.3).
 - Build: `zip` and `curl` (no SDK needed).
 
 ---
@@ -60,6 +60,22 @@ Or open `http://<roku-ip>` in a browser, sign in as `rokudev` with the developer
 
 The channel appears as **HDHR TV** at the end of the home screen's channel grid.
 
+### Package for the Channel Store
+
+To install HDHR TV like any other channel, upload a signed package to the [Roku Developer Dashboard](https://developer.roku.com).
+
+1. Create a signing key once: `telnet <roku-ip> 8080`, then type `genkey`. Save the **Password** and **DevID** it prints. Every later update must be signed with the same key, so back it up.
+2. Bump the version in `manifest`, then build the package:
+
+   ```bash
+   ROKU_IP=192.168.1.20 ROKU_PASS=<developer password> ROKU_SIGN_PASS=<genkey password> ./build.sh package
+   # → out/hdhr-tv-<version>.pkg
+   ```
+
+3. In the dashboard, create a channel and upload the `.pkg`. Publish it as a **beta channel** (installed by invited testers, no review) or submit it for certification as a **public channel**, which can be listed or kept unlisted.
+
+To sign on a different Roku, rekey it with a previous `.pkg` and its password at `http://<roku-ip>/plugin_inspect`.
+
 ## Repository Structure
 
 ```bash
@@ -76,7 +92,7 @@ The channel appears as **HDHR TV** at the end of the home screen's channel grid.
 │   └── Util.brs                 # URL normalization and JSON helpers
 ├── /images                      # Channel icon (FHD/HD) and splash screens
 ├── /tools/make_images.py        # Redraws /images
-└── build.sh                     # Zip, sideload, remove
+└── build.sh                     # Zip, sideload, package, remove
 ```
 
 ## Architecture Overview
